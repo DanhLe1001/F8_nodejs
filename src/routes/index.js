@@ -5,7 +5,7 @@ const courseSite = require('./courses');
 function route(app) {
     // app.use('/abc', newRoute);
     app.use('/news', newRoute);
-    app.use('/course', courseSite);
+    app.use('/courses', courseSite);
     app.use('/', newSite);
 }
 
