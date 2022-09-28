@@ -1,17 +1,18 @@
-const path = require("path");
-const express = require("express");
+const path = require('path');
+const express = require('express');
 const app = express();
 const port = 3000;
-const routes = require("./routes/index");
-// const handlebars = require("express-handlebars");
-const { engine } = require("express-handlebars");
+const routes = require('./routes/index');
+const { engine } = require('express-handlebars');
+// const courses = mongoose.model('courses', demo_nodejs_dev);
+const db = require('./congfig/db');
+db.connect();
 
-app.engine("hbs", engine({ extname: ".hbs" }));
+app.engine('hbs', engine({ extname: '.hbs' }));
 // app.engine("handlebars", engine());
-app.set("view engine", ".hbs");
-app.set("views", path.join(__dirname, "resource/views"));
-
-app.use(express.static(path.join(__dirname, "public")));
+app.set('view engine', '.hbs');
+app.set('views', path.join(__dirname, 'resource', 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //route
 routes(app);
