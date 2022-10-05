@@ -8,7 +8,7 @@ class courseController {
         const course = new Course(fromData);
         course
             .save()
-            .then(() => res.redirect('/'))
+            .then(() => res.redirect('/me/store/courses'))
             .catch((err) => {
                 res.send(err.message);
             });
@@ -40,9 +40,22 @@ class courseController {
             .then(() => res.redirect('/me/store/courses'))
             .catch(next);
     }
-    //delete course/:id
+    //delete courses/:id
     destroy(req, res, next) {
+        Course.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+    //delete courses/:id/force
+    forceDestroy(req, res, next) {
         Course.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    //patch course/:id/strote
+    restore(req, res, next) {
+        Course.restore({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }
